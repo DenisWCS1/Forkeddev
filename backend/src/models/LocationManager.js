@@ -7,8 +7,8 @@ class LocationManager extends AbstractManager {
 
   insert(location) {
     return this.database.query(
-      `insert into ${this.table} (id, city_name, updated_on, created_on) values (?,?,?,?)`,
-      [location.city_name, location.updated_on, location.created_on]
+      `insert into ${this.table} (id, city_name) values (?,?)`,
+      [location.city_name]
     );
   }
 
