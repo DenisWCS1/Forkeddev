@@ -1,5 +1,5 @@
 CREATE TABLE `user` (
-	`id_user` INT NOT NULL AUTO_INCREMENT UNIQUE,
+	`id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`firstname` varchar(45) NOT NULL,
 	`lastname` varchar(100) NOT NULL,
 	`email` varchar(100) NOT NULL,
@@ -7,65 +7,65 @@ CREATE TABLE `user` (
 	`role` varchar(20) NOT NULL,
 	`updated_on` DATETIME NOT NULL,
 	`created_on` DATETIME NOT NULL,
-	PRIMARY KEY (`id_user`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `room` (
-	`id_room` INT NOT NULL AUTO_INCREMENT UNIQUE,
+	`id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`fk_location` INT NOT NULL,
 	`name` varchar(45) NOT NULL,
 	`plan` varchar(255) NOT NULL,
 	`url_picture` varchar(255) NOT NULL,
 	`updated_on` DATETIME NOT NULL,
 	`created_on` DATETIME NOT NULL,
-	PRIMARY KEY (`id_room`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `location` (
-	`id_location` INT NOT NULL AUTO_INCREMENT UNIQUE,
+	`id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`city_name` varchar(45) NOT NULL,
 	`updated_on` DATETIME NOT NULL,
 	`created_on` DATETIME NOT NULL,
-	PRIMARY KEY (`id_location`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `reservation` (
-	`id_reservation` INT NOT NULL AUTO_INCREMENT UNIQUE,
+	`id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`fk_user` INT NOT NULL,
 	`fk_room` INT NOT NULL,
 	`start_datetime` DATETIME(6) NOT NULL,
 	`end_datetime` DATETIME(6) NOT NULL,
 	`updated_on` DATETIME NOT NULL,
 	`created_on` DATETIME NOT NULL,
-	PRIMARY KEY (`id_reservation`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `material` (
-	`id_material` INT NOT NULL AUTO_INCREMENT UNIQUE,
+	`id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`name` varchar(100) NOT NULL,
 	`updated_on` DATETIME NOT NULL,
 	`created_on` DATETIME NOT NULL,
-	PRIMARY KEY (`id_material`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `room_material` (
-	`id_fk` INT NOT NULL AUTO_INCREMENT UNIQUE,
+	`id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`fk_room` INT NOT NULL,
 	`fk_material` INT NOT NULL,
 	`updated_on` DATETIME NOT NULL,
 	`created_on` DATETIME NOT NULL,
-	PRIMARY KEY (`id_fk`)
+	PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `room` ADD CONSTRAINT `room_location` FOREIGN KEY (`fk_location`) REFERENCES `location`(`id_location`);
+ALTER TABLE `room` ADD CONSTRAINT `room_location` FOREIGN KEY (`fk_location`) REFERENCES `location`(`id`);
 
-ALTER TABLE `reservation` ADD CONSTRAINT `reservation_user` FOREIGN KEY (`fk_user`) REFERENCES `user`(`id_user`);
+ALTER TABLE `reservation` ADD CONSTRAINT `reservation_user` FOREIGN KEY (`fk_user`) REFERENCES `user`(`id`);
 
-ALTER TABLE `reservation` ADD CONSTRAINT `reservation_room` FOREIGN KEY (`fk_room`) REFERENCES `room`(`id_room`);
+ALTER TABLE `reservation` ADD CONSTRAINT `reservation_room` FOREIGN KEY (`fk_room`) REFERENCES `room`(`id`);
 
-ALTER TABLE `room_material` ADD CONSTRAINT `room` FOREIGN KEY (`fk_room`) REFERENCES `room`(`id_room`);
+ALTER TABLE `room_material` ADD CONSTRAINT `room` FOREIGN KEY (`fk_room`) REFERENCES `room`(`id`);
 
-ALTER TABLE `room_material` ADD CONSTRAINT `material` FOREIGN KEY (`fk_material`) REFERENCES `material`(`id_material`);
+ALTER TABLE `room_material` ADD CONSTRAINT `material` FOREIGN KEY (`fk_material`) REFERENCES `material`(`id`);
 
 
 INSERT INTO user (`firstname`,`lastname`,`email`,`password`,`role`,`updated_on`,`created_on`)
