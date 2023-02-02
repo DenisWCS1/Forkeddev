@@ -14,7 +14,9 @@ It's pre-configured with a set of tools which'll help students produce industry-
 - _NB: To launch the backend server, you'll need an environment file with database credentials. You'll find a template one in `backend/.env.sample`_
 
 ### Available Commands
+
 f
+
 - `migrate` : Run the database migration script
 - `dev` : Starts both servers (frontend + backend) in one terminal
 - `dev-front` : Starts the React frontend server
@@ -23,7 +25,9 @@ f
 - `fix` : Fixes linter errors (run it if `lint` growls on your code !)
 
 ## FAQ
+
 ffesfd
+
 ### Tools
 
 - _Concurrently_ : Allows for several commands to run concurrently in the same CLI
@@ -36,6 +40,7 @@ ffesfd
 
 ### Deployment
 
+5648646
 For deployment, you have to go to `secrets` → app `actions` on the github repo to insert via `New repository secret` :
 
 - CAPROVER_BACK_APPNAME : name app on caprover
