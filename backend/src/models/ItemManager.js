@@ -1,5 +1,5 @@
 const AbstractManager = require("./AbstractManager");
-// ici changer le table par le nom de la table à interroger 
+// ici changer le table par le nom de la table à interroger
 class ItemManager extends AbstractManager {
   constructor() {
     super({ table: "item" });

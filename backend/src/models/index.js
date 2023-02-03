@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const mysql = require("mysql2/promise");
 
-// create a connection pool to the database
+//  create a connection pool to the database
 
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
@@ -14,7 +14,7 @@ const pool = mysql.createPool({
   database: DB_NAME,
 });
 
-// try a connection
+//  try a connection
 
 pool.getConnection().catch(() => {
   console.warn(
@@ -25,16 +25,14 @@ pool.getConnection().catch(() => {
   );
 });
 
-// declare and fill models: that's where you should register your own managers
+//  declare and fill models: that's where you should register your own managers
 
 const models = {};
-
 const ItemManager = require("./ItemManager");
 const RoomManager = require("./RoomManager");
 const UserManager = require("./UserManager");
 const LocationManager = require("./LocationManager");
 const MaterialManager = require("./MaterialManager");
-
 
 models.item = new ItemManager();
 models.room = new RoomManager();
@@ -47,8 +45,9 @@ models.room.setDatabase(pool);
 models.user.setDatabase(pool);
 models.location.setDatabase(pool);
 models.material.setDatabase(pool);
-// bonus: use a proxy to personalize error message,
-// when asking for a non existing model
+//  bonus: use a proxy to personalize error message,
+
+//  when asking for a non existing model
 
 const handler = {
   get(obj, prop) {

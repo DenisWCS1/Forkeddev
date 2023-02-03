@@ -1,14 +1,12 @@
 const AbstractManager = require("./AbstractManager");
-// ici changer le table par le nom de la table à interroger 
+// ici changer le table par le nom de la table à interroger
 class MaterialManager extends AbstractManager {
   constructor() {
     super({ table: "material" });
   }
 
   insert(material) {
-    return this.database.query(
-    `insert into ${this.table} (name) values (?)`, 
-    [
+    return this.database.query(`insert into ${this.table} (name) values (?)`, [
       material.name,
     ]);
   }
