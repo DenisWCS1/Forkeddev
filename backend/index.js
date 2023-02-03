@@ -1,4 +1,4 @@
-//model = index
+// model = index
 require("dotenv").config();
 
 const app = require("./src/app");
