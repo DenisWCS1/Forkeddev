@@ -1,12 +1,10 @@
 import Home from "./pages/Home";
 
-import "./App.css";
-
 function App() {
   return (
-    <div className="App">
+    <div>
+      <p className="text-5xl mr-6 my-5">Je suis le testxcdc</p>
       <Home />
-      <p>coucou</p>
     </div>
   );
 }
