@@ -1,12 +1,10 @@
 import Home from "./pages/Home";
 
-import "./App.css";
-
 function App() {
   return (
-    <div className="App">
+    <div className="  border-t-pink-500">
+      <p className="test bg-orange-700 text-5xl mr-6 my-5">Je suis le testccccxcdc</p>
       <Home />
-      <p>coucou</p>
     </div>
   );
 }
