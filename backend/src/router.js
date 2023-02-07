@@ -13,6 +13,7 @@ router.get("/user", userControllers.browse);
 router.get("/user/:id", userControllers.read);
 router.put("/user/:id", userControllers.edit);
 router.post("/user", userControllers.add);
+router.post("/user/signup", inscriptionControllers.add);
 router.delete("/user/:id", userControllers.destroy);
 
 router.get("/room", roomControllers.browse);
@@ -33,6 +34,6 @@ router.put("/material/:id", materialControllers.edit);
 router.post("/material", materialControllers.add);
 router.delete("/material/:id", materialControllers.destroy);
 
-router.post("/sign_up", inscriptionControllers.edit);
+// router.post("/signup", inscriptionControllers.edit);
 
 module.exports = router;
