@@ -11,8 +11,7 @@ const add = (req, res) => {
       res.location(`/user/signup/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
+      res.send("Email déjà enregistré");
     });
 };
 
