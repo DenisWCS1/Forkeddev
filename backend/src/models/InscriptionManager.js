@@ -26,15 +26,15 @@ class InscriptionManager extends AbstractManager {
     return this.findByEmail(user.email)
       .then((result) => {
         if (result.length > 0) {
-          return Promise.reject(error);
+          return Promise.reject();
         }
         return this.database.query(
           `insert into ${this.table} (firstname, lastname, email, password, role) values (?,?,?,?,?) `,
           [user.firstname, user.lastname, user.email, user.password, "user"]
         );
       })
-      .catch((error) => {
-        return Promise.reject(error);
+      .catch(() => {
+        return Promise.reject();
       });
   }
 

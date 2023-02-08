@@ -1,4 +1,5 @@
 // this is the controller file
+const { LogError } = require("concurrently");
 const models = require("../models");
 
 const browse = (req, res) => {
@@ -68,6 +69,18 @@ const add = (req, res) => {
     });
 };
 
+const addSignup = (req, res) => {
+  const user = req.body;
+  models.user
+    .insert(user)
+    .then(([result]) => {
+      res.location(`/user/signup/${result.insertId}`).sendStatus(201);
+    })
+    .catch(() => {
+      res.status(401).send("Email déjà enregistré");
+    });
+};
+
 const destroy = (req, res) => {
   models.user
     .delete(req.params.id)
@@ -89,5 +102,6 @@ module.exports = {
   read,
   edit,
   add,
+  addSignup,
   destroy,
 };
