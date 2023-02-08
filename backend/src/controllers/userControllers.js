@@ -1,5 +1,5 @@
 // this is the controller file
-const { LogError } = require("concurrently");
+
 const models = require("../models");
 
 const browse = (req, res) => {

@@ -8,14 +8,19 @@ class UserManager extends AbstractManager {
   insert(user) {
     return this.findByEmail(user.email)
       .then((result) => {
-        console.log(result);
         if (result.length === 0) {
           console.error(result.length);
           return Promise.reject();
         }
         return this.database.query(
-          `insert into ${this.table} (firstname, lastname, email, password, role) values (?,?,?,?,?) `,
-          [user.firstname, user.lastname, user.email, user.password, "user"]
+          `insert into ${this.table} (firstname, lastname, email, hashedPassword , role) values (?,?,?,?,?) `,
+          [
+            user.firstname,
+            user.lastname,
+            user.email,
+            user.hashedPassword,
+            "user",
+          ]
         );
       })
       .catch(() => {
