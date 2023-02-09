@@ -1,5 +1,4 @@
 // this is the controller file
-const moment = require("moment");
 const models = require("../models");
 
 const browse = (req, res) => {
