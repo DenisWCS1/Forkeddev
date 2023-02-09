@@ -28,23 +28,26 @@ pool.getConnection().catch(() => {
 //  declare and fill models: that's where you should register your own managers
 
 const models = {};
-const ItemManager = require("./ItemManager");
+// const ItemManager = require("./ItemManager");
 const RoomManager = require("./RoomManager");
 const UserManager = require("./UserManager");
 const LocationManager = require("./LocationManager");
 const MaterialManager = require("./MaterialManager");
+// const InscriptionManager = require("./InscriptionManager");
 
-models.item = new ItemManager();
+// models.item = new ItemManager();
 models.room = new RoomManager();
 models.user = new UserManager();
 models.location = new LocationManager();
 models.material = new MaterialManager();
+// models.inscription = new InscriptionManager();
 
-models.item.setDatabase(pool);
+// models.item.setDatabase(pool);
 models.room.setDatabase(pool);
 models.user.setDatabase(pool);
 models.location.setDatabase(pool);
 models.material.setDatabase(pool);
+// models.inscription.setDatabase(pool);
 //  bonus: use a proxy to personalize error message,
 
 //  when asking for a non existing model

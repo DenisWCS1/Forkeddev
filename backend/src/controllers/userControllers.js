@@ -1,4 +1,5 @@
 // this is the controller file
+
 const models = require("../models");
 
 const browse = (req, res) => {
@@ -67,6 +68,7 @@ const add = (req, res) => {
     });
 };
 
+
 const addLogin = (req, res) => {
   const { email /* password */ } = req.body;
   models.user
@@ -80,6 +82,17 @@ const addLogin = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send("Error retrieving data from database", err);
+
+const addSignup = (req, res) => {
+  const user = req.body;
+  models.user
+    .insert(user)
+    .then(([result]) => {
+      res.location(`/user/signup/${result.insertId}`).sendStatus(201);
+    })
+    .catch(() => {
+      res.status(401).send("Email déjà enregistré");
+
     });
 };
 
@@ -105,5 +118,6 @@ module.exports = {
   edit,
   add,
   addLogin,
+  addSignup,
   destroy,
 };
