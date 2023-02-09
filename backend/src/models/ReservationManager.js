@@ -7,7 +7,7 @@ class ReservationManager extends AbstractManager {
 
   insert(reservation) {
     return this.database.query(
-      `insert into ${this.table} (fk_user, fk_room, start_datetime, end_datetime, updated_on, created_on) values (?,?)`,
+      `insert into ${this.table} (fk_user, fk_room, start_datetime, end_datetime, updated_on, created_on) values (?, ?, ?, ?, ?, ?)`,
       [
         reservation.fk_user,
         reservation.fk_room,
