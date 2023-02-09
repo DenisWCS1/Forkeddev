@@ -1,5 +1,6 @@
 // this is the controller file
 
+const auth = require("./auth");
 const models = require("../models");
 
 const browse = (req, res) => {
@@ -68,10 +69,11 @@ const add = (req, res) => {
     });
 };
 
-const addLogin = (req, res) => {
-  const { email /* password */ } = req.body;
+const login = (req, res) => {
+  const { email } = req.body;
   models.user
     .findByEmail(email)
+    .verifyPassword()
     .then(([user]) => {
       if (user[0] != null) {
         res.json(user);
@@ -84,12 +86,12 @@ const addLogin = (req, res) => {
     });
 };
 
-const addSignup = (req, res) => {
+const register = (req, res) => {
   const user = req.body;
   models.user
     .insert(user)
     .then(([result]) => {
-      res.location(`/user/signup/${result.insertId}`).sendStatus(201);
+      res.location(`/user/register/${result.insertId}`).sendStatus(201);
     })
     .catch(() => {
       res.status(401).send("Email déjà enregistré");
@@ -117,7 +119,7 @@ module.exports = {
   read,
   edit,
   add,
-  addLogin,
-  addSignup,
+  login,
+  register,
   destroy,
 };

@@ -1,5 +1,10 @@
 const express = require("express");
 
+const {
+  hashPassword,
+  verifyPassword,
+  verifyToken,
+} = require("./controllers/auth");
 require("dotenv").config();
 
 const router = express.Router();
@@ -16,9 +21,10 @@ router.get("/user/:id", userControllers.read);
 router.put("/user/:id", userControllers.edit);
 router.post("/user", userControllers.add);
 
-router.post("/user/login", userControllers.addLogin);
+// router.post("/user/login", hashPassword, userControllers.addLogin);
+router.post("/user/login", userControllers.login, verifyPassword);
 
-router.post("/user/signup", userControllers.addSignup);
+router.post("/user/register", userControllers.register);
 router.delete("/user/:id", userControllers.destroy);
 
 router.get("/room", roomControllers.browse);
