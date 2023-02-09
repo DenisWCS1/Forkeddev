@@ -54,7 +54,6 @@ const edit = (req, res) => {
 
 const add = (req, res) => {
   const user = req.body;
-
   // TODO validations (length, format...)
 
   models.user
@@ -65,6 +64,22 @@ const add = (req, res) => {
     .catch((err) => {
       console.error(err);
       res.sendStatus(500);
+    });
+};
+
+const addLogin = (req, res) => {
+  const { email /* password */ } = req.body;
+  models.user
+    .findByEmail(email)
+    .then(([user]) => {
+      if (user[0] != null) {
+        res.json(user);
+      } else {
+        res.status(404);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send("Error retrieving data from database", err);
     });
 };
 
@@ -89,5 +104,6 @@ module.exports = {
   read,
   edit,
   add,
+  addLogin,
   destroy,
 };
