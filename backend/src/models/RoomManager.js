@@ -20,39 +20,22 @@ class RoomManager extends AbstractManager {
   }
   /*
   // WIP here
-  filter(start, end, location) {
-    let sql = `SELECT room.id,  room.name, room.plan, room.url_picture,  FROM room `;
-    if (start !== undefined && end !== undefined && location === undefined) {
-      (sql += `SELECT room.id,  room.name, room.plan, room.url_picture, location.city_name FROM room 
-      LEFT JOIN location
-      ON room.fk_location = location.id
-      where room.id NOT IN(
-        SELECT room.id FROM room 
-        INNER JOIN reservation 
-        ON room.id = reservation.fk_room  where 
-        (reservation.start_datetime  BETWEEN STR_TO_DATE('01-05-2023 09:00:00', '%d-%m-%Y %H:%i:%s') AND STR_TO_DATE('08-05-2023 08:00:00', '%d-%m-%Y %H:%i:%s') ) AND
-        (reservation.end_datetime  BETWEEN STR_TO_DATE('01-05-2023 09:00:00', '%d-%m-%Y %H:%i:%s') AND STR_TO_DATE('08-05-2023 08:00:00', '%d-%m-%Y %H:%i:%s'))
-        GROUP BY  room.id)
-      order by room.name asc`),
-        [start, end, start, end];
-    } else if (
-      start !== undefined &&
-      end !== undefined &&
-      location !== undefined
-    ) {
-      (sql += `
+  filter(start, end) {
+    const sqlvalue = [];
+    const sql = ` SELECT room.id,  room.name, room.plan, room.url_picture FROM room 
     LEFT JOIN location
-    ON room.fk_location = ?
-    where room.id NOT IN(
-      SELECT room.id FROM room 
-      INNER JOIN reservation 
-      ON room.id = reservation.fk_room  where 
-      (reservation.start_datetime  BETWEEN STR_TO_DATE(?) AND STR_TO_DATE(?) ) AND
-      (reservation.end_datetime  BETWEEN STR_TO_DATE(?) AND STR_TO_DATE(?))
-      GROUP BY room.id)
-    order by room.name asc`),
-        [location.id, start, end, start, end];
-    }
+          ON room.fk_location = location.id
+          where room.id NOT IN(
+            SELECT room.id FROM room 
+            INNER JOIN reservation 
+            ON room.id = reservation.fk_room  where 
+            (reservation.start_datetime  BETWEEN STR_TO_DATE(?, "%d-%m-%Y %H:%i:%s") AND STR_TO_DATE(?, "%d-%m-%Y %H:%i:%s")) AND
+            (reservation.end_datetime  BETWEEN STR_TO_DATE(?, "%d-%m-%Y %H:%i:%s") AND STR_TO_DATE(?, "%d-%m-%Y %H:%i:%s"))
+            GROUP BY room.id)
+          order by room.name asc`;
+    sqlvalue.push(start, end, start, end);
+
+    return this.database.query(sql, sqlvalue);
   } */
 }
 

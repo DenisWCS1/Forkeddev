@@ -1,4 +1,5 @@
 // this is the controller file
+const moment = require("moment");
 const models = require("../models");
 
 const browse = (req, res) => {
@@ -85,12 +86,19 @@ const destroy = (req, res) => {
 }; /*
 // WIP here
 const filtered = (req, res) => {
-  const { start, end } = req.query;
+  console.log(req.query.start);
+  const { start, end, format } = req.query;
+  // const formatDateStart = `'${Date.parse(start)}', '${format}'`;
+  // const formatDateEnd = `'${Date.parse(end)}', '${format}'`;
+  const formatDateStart = `concat(08, "-", 02, "-", 23), "%d-%m-%Y %H:%i:%s"`;
+  const formatDateEnd = `concat(08, "-", 03, "-", 23), "%d-%m-%Y %H:%i:%s"`;
+  console.log("start date", formatDateStart, "end date", formatDateEnd);
+
   const location = parseInt(req.query.location);
-  console.log(start);
+  console.log("start ", formatDateStart, "end ", formatDateEnd);
   models.room
-    .filter(start, end, location)
-    .then((rows) => {
+    .filter(start, end)
+    .then(([rows]) => {
       console.log(rows);
       res.send(rows);
     })
