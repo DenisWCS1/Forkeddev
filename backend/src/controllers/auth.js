@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const hashingOptions = {
   type: argon2.argon2id,
   memoryCost: 2 ** 16,
-  timeCost: 5,
+  timeCost: 3,
   paralleslism: 1,
 };
 
@@ -14,7 +14,6 @@ const hashPassword = (req, res, next) => {
     .then((hashedPassword) => {
       req.body.hashedPassword = hashedPassword;
       delete req.body.password;
-      console.log(hashedPassword);
       next();
     })
 
@@ -23,19 +22,21 @@ const hashPassword = (req, res, next) => {
       res.sendStatus(500);
     });
 };
-const verifyPassword = (req, res, next) => {
+const verifyPassword = (req, res) => {
   argon2
     .verify(req.user.hashedPassword, req.body.password, hashingOptions)
-    .then((verified) => {
-      if (verified) {
-        const payload = { sub: req.user.id };
+    .then((isVerified) => {
+      if (isVerified) {
+        const payload = { sub: req.user.id, iat: new Date().getTime() };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
           expiresIn: "1h",
         });
 
         delete req.user.hashedPassword;
-        res.send({ token, user: req.user });
+        delete req.body.password;
+
+        res.json(token);
       } else {
         res.sendStatus(401);
       }
@@ -45,6 +46,7 @@ const verifyPassword = (req, res, next) => {
       res.sendStatus(500);
     });
 };
+
 const verifyToken = (req, res, next) => {
   try {
     const authorizationHeader = req.get("Authorization");
