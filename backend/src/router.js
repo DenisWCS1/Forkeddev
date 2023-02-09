@@ -16,6 +16,7 @@ router.post("/user", userControllers.add);
 router.post("/user/login", userControllers.addLogin);
 router.delete("/user/:id", userControllers.destroy);
 
+router.get("/filtered", roomControllers.filtered);
 router.get("/room", roomControllers.browse);
 router.get("/room/:id", roomControllers.read);
 router.put("/room/:id", roomControllers.edit);

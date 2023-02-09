@@ -82,12 +82,28 @@ const destroy = (req, res) => {
       console.error(err);
       res.sendStatus(500);
     });
-};
-
+}; /*
+// WIP here
+const filtered = (req, res) => {
+  const { start, end } = req.query;
+  const location = parseInt(req.query.location);
+  console.log(start);
+  models.room
+    .filter(start, end, location)
+    .then((rows) => {
+      console.log(rows);
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.send(500);
+    });
+}; */
 module.exports = {
   browse,
   read,
   edit,
   add,
   destroy,
+  // filtered,
 };
