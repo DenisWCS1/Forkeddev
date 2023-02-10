@@ -2,22 +2,23 @@ CREATE TABLE `user` (
 	`id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`firstname` varchar(45) NOT NULL,
 	`lastname` varchar(100) NOT NULL,
-	`email` varchar(100) NOT NULL,
-	`password` varchar(45) NOT NULL,
+	`email` varchar(100) NOT NULL UNIQUE,
+	`password` varchar(255) NOT NULL,
 	`role` varchar(20) NOT NULL,
 	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `room` (
 	`id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+	`capacity` INT NOT NULL,
 	`fk_location` INT NOT NULL,
 	`name` varchar(45) NOT NULL,
 	`plan` varchar(255) NOT NULL,
 	`url_picture` varchar(255) NOT NULL,
 	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
 );
 
@@ -25,7 +26,7 @@ CREATE TABLE `location` (
 	`id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`city_name` varchar(45) NOT NULL,
 	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
 );
 
@@ -33,10 +34,10 @@ CREATE TABLE reservation (
     `id` INT NOT NULL AUTO_INCREMENT UNIQUE,
     `fk_user` INT NOT NULL,
     `fk_room` INT NOT NULL,
-    `start_datetime` TIMESTAMP NOT NULL,
-    `end_datetime` TIMESTAMP NOT NULL,
+    `start_TIMESTAMP` TIMESTAMP NOT NULL,
+    `end_TIMESTAMP` TIMESTAMP NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );
 
@@ -44,7 +45,7 @@ CREATE TABLE `material` (
 	`id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`name` varchar(100) NOT NULL,
 	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
 );
 
@@ -53,17 +54,17 @@ CREATE TABLE `room_material` (
 	`fk_room` INT NOT NULL,
 	`fk_material` INT NOT NULL,
 	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
 );
 
 ALTER TABLE `room` ADD CONSTRAINT `room_location` FOREIGN KEY (`fk_location`) REFERENCES `location`(`id`);
 
-ALTER TABLE `reservation` ADD CONSTRAINT `reservation_user` FOREIGN KEY (`fk_user`) REFERENCES `user`(`id`);
+ALTER TABLE `reservation` ADD CONSTRAINT `reservation_user` FOREIGN KEY (`fk_user`) REFERENCES `user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `reservation` ADD CONSTRAINT `reservation_room` FOREIGN KEY (`fk_room`) REFERENCES `room`(`id`);
+ALTER TABLE `reservation` ADD CONSTRAINT `reservation_room` FOREIGN KEY (`fk_room`) REFERENCES `room`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `room_material` ADD CONSTRAINT `room` FOREIGN KEY (`fk_room`) REFERENCES `room`(`id`);
+ALTER TABLE `room_material` ADD CONSTRAINT `room` FOREIGN KEY (`fk_room`) REFERENCES `room`(`id`) ON DELETE CASCADE  ON UPDATE CASCADE;
 
 ALTER TABLE `room_material` ADD CONSTRAINT `material` FOREIGN KEY (`fk_material`) REFERENCES `material`(`id`);
 
@@ -85,7 +86,9 @@ VALUES
 ('David','ExcessivementLofe','david.excessivementLofe@yopmail.com','0','user'),
 ('Monica','Belelouchy','monica.belelouchy@yopmail.com','0','user'),
 ('Erica','Hernandez','erica.hernandez@yopmail.com','0','user'),
-('Ahmed','Sahim','ahmed.sahim@yopmail.com','0','user'),
+('Ahmed','Sahim','ahmed.sahim@yopmail.com','0','uALTER TABLE reservation ADD CONSTRAINT reservation_room FOREIGN KEY (fk_room) REFERENCES room(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE room_material ADD CONSTRAINT room FOREIGN KEY (fk_room) REFERENCES room(id) ON DELETE CASCADE  ON UPDATE CASCADE;ser'),
 ('Apu ','Nahasa','anthony.kea@yopmail.com','0','user'),
 ('Jo','Holt','jo.holt@yopmail.com','0','user'),
 ('Guistino','Ladaguini','guistino.ladaguini@yopmail.com','0','user'),
@@ -120,20 +123,47 @@ VALUES
 ('Accès PMR'),
 ('Vidéo projecteur');
 
-INSERT INTO room (`fk_location`,`name`,`plan`,`url_picture`)
+INSERT INTO room (`fk_location`, `capacity`, `name`,`plan`,`url_picture`)
 VALUES 
-(1,'Loire','map','url_picture'),
-(1,'Sarthe','map','url_picture'),
-(2,'Acheneau','map','url_picture'),
-(2,'Divatte','map','url_picture'),
-(3,'Sèvre','map','url_picture'),
-(3,'Le Brivet','map','url_picture'),
-(1,'Loire','map','url_picture'),
-(2,'Namnettes','map','url_picture'),
-(3,'Zen','map','url_picture');
+(1, 50, 'Loire','map','url_picture'),
+(1, 34, 'Sarthe','map','url_picture'),
+(2, 29, 'Acheneau','map','url_picture'),
+(2, 56, 'Divatte','map','url_picture'),
+(3, 35,'Sèvre','map','url_picture'),
+(3, 44,'Le Brivet','map','url_picture'),
+(1, 67,'Loire','map','url_picture'),
+(2, 68,'Namnettes','map','url_picture'),
+(3, 39,'Zen','map','url_picture');
+
+INSERT INTO room_material 
+VALUES 
+(1,1,1,'2023-02-08 14:53:13','2023-02-08 15:53:13'),
+(2,1,2,'2023-02-08 14:53:13','2023-02-08 15:53:13'),
+(3,1,3,'2023-02-08 14:53:13','2023-02-08 15:53:13'),
+(4,2,1,'2023-02-08 21:10:33','2023-02-08 22:10:33'),
+(5,2,8,'2023-02-08 21:10:33','2023-02-08 22:10:33'),
+(6,2,6,'2023-02-08 21:10:33','2023-02-08 22:10:33'),
+(7,3,1,'2023-02-08 21:10:33','2023-02-08 22:10:33'),
+(8,3,2,'2023-02-08 21:10:33','2023-02-08 22:10:33'),
+(9,3,4,'2023-02-08 21:10:33','2023-02-08 22:10:33'),
+(10,3,6,'2023-02-08 21:10:33','2023-02-08 22:10:33'),
+(11,4,1,'2023-02-08 21:10:33','2023-02-08 22:10:33'),
+(12,4,8,'2023-02-08 21:10:33','2023-02-08 22:10:33'),
+(13,5,8,'2023-02-08 21:10:33','2023-02-08 22:10:33'),
+(14,5,7,'2023-02-09 08:43:26','2023-02-09 09:43:26'),
+(15,5,3,'2023-02-09 08:43:26','2023-02-09 09:43:26'),
+(16,5,6,'2023-02-09 08:43:26','2023-02-09 09:43:26'),
+(17,7,1,'2023-02-09 08:43:26','2023-02-09 09:43:26'),
+(18,7,4,'2023-02-09 08:43:26','2023-02-09 09:43:26'),
+(19,7,5,'2023-02-09 08:43:26','2023-02-09 09:43:26'),
+(20,7,6,'2023-02-09 08:43:26','2023-02-09 09:43:26'),
+(21,8,2,'2023-02-09 08:43:26','2023-02-09 09:43:26'),
+(22,8,3,'2023-02-09 08:43:26','2023-02-09 09:43:26'),
+(23,8,6,'2023-02-09 08:43:26','2023-02-09 09:43:26'),
+(24,8,8,'2023-02-09 08:43:26','2023-02-09 09:43:26');
 
 
-INSERT INTO reservation (fk_user,fk_room,start_datetime,end_datetime)
+INSERT INTO reservation (fk_user,fk_room,start_TIMESTAMP,end_TIMESTAMP)
 VALUES
 (5,1,'2023-06-16 09:00:00','2023-06-16 12:00:00'),
 (15,1,'2023-06-21 06:00:00','2023-06-21 17:00:00'),

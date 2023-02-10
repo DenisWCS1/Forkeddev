@@ -33,18 +33,21 @@ const RoomManager = require("./RoomManager");
 const UserManager = require("./UserManager");
 const LocationManager = require("./LocationManager");
 const MaterialManager = require("./MaterialManager");
+const RoomMaterialManager = require("./Room_materialManager");
 
 models.item = new ItemManager();
 models.room = new RoomManager();
 models.user = new UserManager();
 models.location = new LocationManager();
 models.material = new MaterialManager();
+models.room_material = new RoomMaterialManager();
 
 models.item.setDatabase(pool);
 models.room.setDatabase(pool);
 models.user.setDatabase(pool);
 models.location.setDatabase(pool);
 models.material.setDatabase(pool);
+models.room_material.setDatabase(pool);
 //  bonus: use a proxy to personalize error message,
 
 //  when asking for a non existing model

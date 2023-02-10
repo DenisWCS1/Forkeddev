@@ -2,11 +2,11 @@ const express = require("express");
 
 const router = express.Router();
 
-// const itemControllers = require("./controllers/itemControllers");
 const userControllers = require("./controllers/userControllers");
 const roomControllers = require("./controllers/roomControllers");
 const locationControllers = require("./controllers/locationControllers");
 const materialControllers = require("./controllers/materialControllers");
+const RoomMaterialManager = require("./controllers/room_materialControllers");
 
 router.get("/user", userControllers.browse);
 router.get("/user/:id", userControllers.read);
@@ -31,5 +31,7 @@ router.get("/material/:id", materialControllers.read);
 router.put("/material/:id", materialControllers.edit);
 router.post("/material", materialControllers.add);
 router.delete("/material/:id", materialControllers.destroy);
+
+router.get("/room_material", RoomMaterialManager.detail);
 
 module.exports = router;
