@@ -8,6 +8,7 @@ const roomControllers = require("./controllers/roomControllers");
 const locationControllers = require("./controllers/locationControllers");
 const materialControllers = require("./controllers/materialControllers");
 const reservationControllers = require("./controllers/reservationControllers");
+const myReservationsControllers = require("./controllers/myReservationsControllers");
 
 router.get("/user", userControllers.browse);
 router.get("/user/:id", userControllers.read);
@@ -39,5 +40,11 @@ router.get("/reservation/:id", reservationControllers.read);
 router.put("/reservation/:id", reservationControllers.edit);
 router.post("/reservation", reservationControllers.add);
 router.delete("/reservation/:id", reservationControllers.destroy);
+
+router.get("/myReservations", myReservationsControllers.browse);
+router.get("/myReservations/:id", myReservationsControllers.read);
+router.put("./myReservations/:id", myReservationsControllers.edit);
+router.post("/myReservations", myReservationsControllers.add);
+router.delete("/myReservations/:id", myReservationsControllers.destroy);
 
 module.exports = router;
