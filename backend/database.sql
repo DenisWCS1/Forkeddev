@@ -34,8 +34,8 @@ CREATE TABLE reservation (
     `id` INT NOT NULL AUTO_INCREMENT UNIQUE,
     `fk_user` INT NOT NULL,
     `fk_room` INT NOT NULL,
-    `start_TIMESTAMP` TIMESTAMP NOT NULL,
-    `end_TIMESTAMP` TIMESTAMP NOT NULL,
+    `start_datetime` TIMESTAMP NOT NULL,
+    `end_datetime` TIMESTAMP NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
@@ -87,7 +87,7 @@ VALUES
 ('Monica','Belelouchy','monica.belelouchy@yopmail.com','0','user'),
 ('Erica','Hernandez','erica.hernandez@yopmail.com','0','user'),
 ('Ahmed','Sahim','ahmed.sahim@yopmail.com','0','user'),
-('Apu ','Nahasa','anthony.kea@yopmail.com','0','user'),
+('Apu ','Nahasa','apu.kea@yopmail.com','0','user'),
 ('Jo','Holt','jo.holt@yopmail.com','0','user'),
 ('Guistino','Ladaguini','guistino.ladaguini@yopmail.com','0','user'),
 ('Rodrigo','Amador','rodrigo.amador@yopmail.com','0','user'),
@@ -161,7 +161,7 @@ VALUES
 (24,8,8,'2023-02-09 08:43:26','2023-02-09 09:43:26');
 
 
-INSERT INTO reservation (fk_user,fk_room,start_TIMESTAMP,end_TIMESTAMP)
+INSERT INTO reservation (fk_user,fk_room,start_datetime,end_datetime)
 VALUES
 (5,1,'2023-06-16 09:00:00','2023-06-16 12:00:00'),
 (15,1,'2023-06-21 06:00:00','2023-06-21 17:00:00'),
