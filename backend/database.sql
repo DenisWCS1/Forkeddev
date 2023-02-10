@@ -86,7 +86,7 @@ VALUES
 ('David','ExcessivementLofe','david.excessivementLofe@yopmail.com','0','user'),
 ('Monica','Belelouchy','monica.belelouchy@yopmail.com','0','user'),
 ('Erica','Hernandez','erica.hernandez@yopmail.com','0','user'),
-('Ahmed','Sahim','ahmed.sahim@yopmail.com','0','uALTER TABLE reservation ADD CONSTRAINT reservation_room FOREIGN KEY (fk_room) REFERENCES room(id) ON DELETE CASCADE ON UPDATE CASCADE;
+('Ahmed','Sahim','ahmed.sahim@yopmail.com','0';
 
 ALTER TABLE room_material ADD CONSTRAINT room FOREIGN KEY (fk_room) REFERENCES room(id) ON DELETE CASCADE  ON UPDATE CASCADE;ser'),
 ('Apu ','Nahasa','anthony.kea@yopmail.com','0','user'),
