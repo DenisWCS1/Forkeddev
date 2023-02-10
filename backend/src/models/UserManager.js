@@ -9,7 +9,6 @@ class UserManager extends AbstractManager {
     return this.findByEmail(user.email)
       .then((result) => {
         if (result.length === 0) {
-          console.error(result.length);
           return Promise.reject();
         }
         return this.database.query(
@@ -40,12 +39,6 @@ class UserManager extends AbstractManager {
         user.id,
       ]
     );
-  }
-
-  findByEmail(email) {
-    return this.database.query(`select * from ${this.table} where email = ? `, [
-      email,
-    ]);
   }
 }
 
