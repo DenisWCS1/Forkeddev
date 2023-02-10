@@ -86,7 +86,7 @@ VALUES
 ('David','ExcessivementLofe','david.excessivementLofe@yopmail.com','0','user'),
 ('Monica','Belelouchy','monica.belelouchy@yopmail.com','0','user'),
 ('Erica','Hernandez','erica.hernandez@yopmail.com','0','user'),
-('Ahmed','Sahim','ahmed.sahim@yopmail.com','0',
+('Ahmed','Sahim','ahmed.sahim@yopmail.com','0','user'),
 ('Apu ','Nahasa','anthony.kea@yopmail.com','0','user'),
 ('Jo','Holt','jo.holt@yopmail.com','0','user'),
 ('Guistino','Ladaguini','guistino.ladaguini@yopmail.com','0','user'),
