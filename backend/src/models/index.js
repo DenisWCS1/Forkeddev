@@ -36,8 +36,6 @@ const RoomMaterialManager = require("./Room_materialManager");
 const ReservationManager = require("./ReservationManager");
 const MyReservationsManager = require("./MyReservationsManager");
 
-models.item = new ItemManager();
-
 models.room = new RoomManager();
 models.user = new UserManager();
 models.location = new LocationManager();
