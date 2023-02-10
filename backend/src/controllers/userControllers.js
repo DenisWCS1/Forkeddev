@@ -1,4 +1,6 @@
 // this is the controller file
+const argon2 = require("argon2");
+const jwt = require("jsonwebtoken");
 const models = require("../models");
 
 const browse = (req, res) => {
@@ -67,19 +69,51 @@ const add = (req, res) => {
     });
 };
 
-const addLogin = (req, res) => {
-  const { email /* password */ } = req.body;
+const login = (req, res) => {
+  const { email, password } = req.body;
   models.user
     .findByEmail(email)
     .then(([user]) => {
       if (user[0] != null) {
-        res.json(user);
+        argon2
+          .verify(user[0].password, password)
+          .then((isVerified) => {
+            if (isVerified) {
+              const payload = {
+                sub: user[0].id,
+                iat: new Date().getTime() / 1000,
+              };
+              const token = jwt.sign(payload, process.env.JWT_SECRET, {
+                expiresIn: "1h",
+              });
+              res.json({ token });
+            } else {
+              res.sendStatus(401);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            res.sendStatus(500);
+          });
       } else {
         res.status(404);
       }
     })
     .catch((err) => {
-      res.status(500).send("Error retrieving data from database", err);
+      console.warn(err);
+      res.status(500).send("Error retrieving data from database");
+    });
+};
+
+const register = (req, res) => {
+  const user = req.body;
+  models.user
+    .insert(user)
+    .then(([result]) => {
+      res.location(`/user/register/${result.insertId}`).sendStatus(201);
+    })
+    .catch(() => {
+      res.status(401).send("Email déjà enregistré");
     });
 };
 
@@ -104,6 +138,7 @@ module.exports = {
   read,
   edit,
   add,
-  addLogin,
+  login,
+  register,
   destroy,
 };
