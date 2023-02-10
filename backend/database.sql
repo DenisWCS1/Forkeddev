@@ -129,7 +129,7 @@ VALUES
 (2, 56, 'Divatte','map','url_picture'),
 (3, 35,'Sèvre','map','url_picture'),
 (3, 44,'Le Brivet','map','url_picture'),
-(1, 67,'Loire','map','url_picture'),
+(1, 67,'Maine','map','url_picture'),
 (2, 68,'Namnettes','map','url_picture'),
 (3, 39,'Zen','map','url_picture');
 
