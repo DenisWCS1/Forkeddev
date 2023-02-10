@@ -10,7 +10,6 @@ const roomMaterialControllers = require("./controllers/room_materialControllers"
 const reservationControllers = require("./controllers/reservationControllers");
 const myReservationsControllers = require("./controllers/myReservationsControllers");
 
-
 router.get("/user", userControllers.browse);
 router.get("/user/:id", userControllers.read);
 router.put("/user/:id", userControllers.edit);
@@ -36,7 +35,6 @@ router.put("/material/:id", materialControllers.edit);
 router.post("/material", materialControllers.add);
 router.delete("/material/:id", materialControllers.destroy);
 
-
 router.get("/room_material", roomMaterialControllers.detail);
 
 router.get("/reservation", reservationControllers.browse);
@@ -50,6 +48,5 @@ router.get("/myReservations/:id", myReservationsControllers.read);
 router.put("./myReservations/:id", myReservationsControllers.edit);
 router.post("/myReservations", myReservationsControllers.add);
 router.delete("/myReservations/:id", myReservationsControllers.destroy);
-
 
 module.exports = router;
