@@ -2,7 +2,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.user
+  models.myReservations
     .findAll()
     .then(([rows]) => {
       // with this line , i throw a response to the client
@@ -15,8 +15,8 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.user
-    .find(req.params.id)
+  models.myReservations
+    .findmy(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -31,14 +31,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const user = req.body;
+  const myReservations = req.body;
 
   // TODO validations (length, format...)
 
-  user.id = parseInt(req.params.id, 10);
+  myReservations.id = parseInt(req.params.id, 10);
 
-  models.user
-    .update(user)
+  models.myReservations
+    .update(myReservations)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -53,13 +53,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const user = req.body;
+  const myReservations = req.body;
+
   // TODO validations (length, format...)
 
-  models.user
-    .insert(user)
+  models.myReservations
+    .insert(myReservations)
     .then(([result]) => {
-      res.location(`/user/${result.insertId}`).sendStatus(201);
+      res.location(`/myReservations/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -67,24 +68,8 @@ const add = (req, res) => {
     });
 };
 
-const addLogin = (req, res) => {
-  const { email /* password */ } = req.body;
-  models.user
-    .findByEmail(email)
-    .then(([user]) => {
-      if (user[0] != null) {
-        res.json(user);
-      } else {
-        res.status(404);
-      }
-    })
-    .catch((err) => {
-      res.status(500).send("Error retrieving data from database", err);
-    });
-};
-
 const destroy = (req, res) => {
-  models.user
+  models.myReservations
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -104,6 +89,5 @@ module.exports = {
   read,
   edit,
   add,
-  addLogin,
   destroy,
 };

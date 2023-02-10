@@ -2,7 +2,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.user
+  models.reservation
     .findAll()
     .then(([rows]) => {
       // with this line , i throw a response to the client
@@ -15,7 +15,7 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.user
+  models.reservation
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -31,14 +31,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const user = req.body;
+  const reservation = req.body;
 
   // TODO validations (length, format...)
 
-  user.id = parseInt(req.params.id, 10);
+  reservation.id = parseInt(req.params.id, 10);
 
-  models.user
-    .update(user)
+  models.reservation
+    .update(reservation)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -53,13 +53,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const user = req.body;
+  const reservation = req.body;
+
   // TODO validations (length, format...)
 
-  models.user
-    .insert(user)
+  models.reservation
+    .insert(reservation)
     .then(([result]) => {
-      res.location(`/user/${result.insertId}`).sendStatus(201);
+      res.location(`/reservation/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -67,24 +68,8 @@ const add = (req, res) => {
     });
 };
 
-const addLogin = (req, res) => {
-  const { email /* password */ } = req.body;
-  models.user
-    .findByEmail(email)
-    .then(([user]) => {
-      if (user[0] != null) {
-        res.json(user);
-      } else {
-        res.status(404);
-      }
-    })
-    .catch((err) => {
-      res.status(500).send("Error retrieving data from database", err);
-    });
-};
-
 const destroy = (req, res) => {
-  models.user
+  models.reservation
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -104,6 +89,5 @@ module.exports = {
   read,
   edit,
   add,
-  addLogin,
   destroy,
 };
