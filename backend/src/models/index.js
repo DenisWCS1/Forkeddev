@@ -41,7 +41,6 @@ models.room_material = new RoomMaterialManager();
 models.reservation = new ReservationManager();
 models.myReservations = new MyReservationsManager();
 
-
 models.room.setDatabase(pool);
 models.user.setDatabase(pool);
 models.location.setDatabase(pool);
