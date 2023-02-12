@@ -22,23 +22,38 @@ pool.getConnection().catch(() => {
 });
 
 const models = {};
-const ItemManager = require("./ItemManager");
+
 const RoomManager = require("./RoomManager");
 const UserManager = require("./UserManager");
 const LocationManager = require("./LocationManager");
 const MaterialManager = require("./MaterialManager");
 
-models.item = new ItemManager();
+const RoomMaterialManager = require("./Room_materialManager");
+const ReservationManager = require("./ReservationManager");
+const MyReservationsManager = require("./MyReservationsManager");
+
 models.room = new RoomManager();
 models.user = new UserManager();
 models.location = new LocationManager();
 models.material = new MaterialManager();
 
-models.item.setDatabase(pool);
+models.room_material = new RoomMaterialManager();
+models.reservation = new ReservationManager();
+models.myReservations = new MyReservationsManager();
+
+
 models.room.setDatabase(pool);
 models.user.setDatabase(pool);
 models.location.setDatabase(pool);
 models.material.setDatabase(pool);
+
+models.room_material.setDatabase(pool);
+models.reservation.setDatabase(pool);
+models.myReservations.setDatabase(pool);
+
+//  bonus: use a proxy to personalize error message,
+
+//  when asking for a non existing model
 
 const handler = {
   get(obj, prop) {
