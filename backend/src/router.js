@@ -23,6 +23,8 @@ router.post("/user/login", userControllers.login);
 router.post("/user/register", hashPassword, userControllers.register);
 router.delete("/user/:id", userControllers.destroy);
 
+router.get("/filtered", roomControllers.filtered);
+
 router.get("/room", verifyToken, roomControllers.browse);
 router.get("/room/:id", roomControllers.read);
 router.put("/room/:id", roomControllers.edit);

@@ -2,8 +2,6 @@ require("dotenv").config();
 
 const mysql = require("mysql2/promise");
 
-//  create a connection pool to the database
-
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
 const pool = mysql.createPool({
@@ -13,8 +11,6 @@ const pool = mysql.createPool({
   password: DB_PASSWORD,
   database: DB_NAME,
 });
-
-//  try a connection
 
 pool.getConnection().catch(() => {
   console.warn(
@@ -44,6 +40,7 @@ models.material = new MaterialManager();
 models.room_material = new RoomMaterialManager();
 models.reservation = new ReservationManager();
 models.myReservations = new MyReservationsManager();
+
 
 models.room.setDatabase(pool);
 models.user.setDatabase(pool);
