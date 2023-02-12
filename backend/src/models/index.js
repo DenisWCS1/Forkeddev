@@ -33,21 +33,12 @@ models.room = new RoomManager();
 models.user = new UserManager();
 models.location = new LocationManager();
 models.material = new MaterialManager();
-/*
-console.log(
-  `1/index.js à l'ouverture de l'application, il créé un nouvel objet à partir de model vide et lui ajoute la table qui est dans RoomManager.js EXEMPLE    :`,
-  models.room
-); */
+
 models.item.setDatabase(pool);
 models.room.setDatabase(pool);
 models.user.setDatabase(pool);
 models.location.setDatabase(pool);
 models.material.setDatabase(pool);
-/*
-console.log(
-  `2/index.js à l'ouverture de l'application, il ajoute les paramètres de connexion à la bdd à partir de l'objet models.room voici maintenant l'objet models.room`,
-  models.room
-); */
 
 const handler = {
   get(obj, prop) {
