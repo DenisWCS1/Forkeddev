@@ -16,14 +16,15 @@ function App() {
       <p className="bg-blueSimple-100 text-5xl mr-6 my-5">
         J'utilise le CSS Perso
       </p>
-      <p className="bg-turquoise-100 text-5xl mr-6 my-5">J'utilise le CSS Perso
+      <p className="bg-turquoise-100 text-5xl mr-6 my-5">
+      J'utilise le CSS Perso
       </p>
       <p className="bg-greySimple-100 text-5xl mr-6 my-5">
         J'utilise le CSS Perso
       </p>
       <p className="bg-whiteSimple-100 text-5xl mr-6 my-5">
         J'utilise le CSS Perso
-      </p>
+</p>
       
       <Home />
     </div>
