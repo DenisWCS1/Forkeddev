@@ -2,7 +2,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.item
+  models.myReservations
     .findAll()
     .then(([rows]) => {
       // with this line , i throw a response to the client
@@ -15,8 +15,8 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.item
-    .find(req.params.id)
+  models.myReservations
+    .findmy(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -31,14 +31,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const item = req.body;
+  const myReservations = req.body;
 
   // TODO validations (length, format...)
 
-  item.id = parseInt(req.params.id, 10);
+  myReservations.id = parseInt(req.params.id, 10);
 
-  models.item
-    .update(item)
+  models.myReservations
+    .update(myReservations)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -53,14 +53,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const item = req.body;
+  const myReservations = req.body;
 
   // TODO validations (length, format...)
 
-  models.item
-    .insert(item)
+  models.myReservations
+    .insert(myReservations)
     .then(([result]) => {
-      res.location(`/items/${result.insertId}`).sendStatus(201);
+      res.location(`/myReservations/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -69,7 +69,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.item
+  models.myReservations
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {

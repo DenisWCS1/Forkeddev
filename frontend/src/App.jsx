@@ -1,12 +1,11 @@
-import Home from "./pages/Home";
-
-import "./App.css";
+import RoomsFiltered from "./components/RoomHome/RoomsFiltered";
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-      <p>coucou</p>
+    <div>
+      <div>
+        <RoomsFiltered />
+      </div>
     </div>
   );
 }

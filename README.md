@@ -15,6 +15,8 @@ It's pre-configured with a set of tools which'll help students produce industry-
 
 ### Available Commands
 
+f
+
 - `migrate` : Run the database migration script
 - `dev` : Starts both servers (frontend + backend) in one terminal
 - `dev-front` : Starts the React frontend server
@@ -23,6 +25,8 @@ It's pre-configured with a set of tools which'll help students produce industry-
 - `fix` : Fixes linter errors (run it if `lint` growls on your code !)
 
 ## FAQ
+
+ffesfd
 
 ### Tools
 
@@ -36,6 +40,7 @@ It's pre-configured with a set of tools which'll help students produce industry-
 
 ### Deployment
 
+5648646
 For deployment, you have to go to `secrets` → app `actions` on the github repo to insert via `New repository secret` :
 
 - CAPROVER_BACK_APPNAME : name app on caprover
