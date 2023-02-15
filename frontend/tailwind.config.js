@@ -26,10 +26,9 @@ module.exports = {
           100: "#f1eeee",
         },
       },
-      screens: {
-        mob: "480px",
-        desk: "1280px",
-      },
+  screen: {
+    sm: "480px",
+  },
       fontFamily: {},
     },
   },
