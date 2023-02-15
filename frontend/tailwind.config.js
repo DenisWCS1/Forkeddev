@@ -3,6 +3,10 @@ module.exports = {
   content: ["./src/**/*.{jsx,js}"],
   theme: {
     extend: {
+      spacing: {
+        'perso45rem': '45rem',
+      },
+
       colors: {
         dark: {
           100: "#0C131F",
@@ -26,11 +30,11 @@ module.exports = {
           100: "#f1eeee",
         },
       },
-  screen: {
-    sm: "480px",
-  },
       fontFamily: {},
     },
+  },
+  screen: {
+    sm: "480px",
   },
 
   plugins: [],
